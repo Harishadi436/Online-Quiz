@@ -1,0 +1,140 @@
+package com.QuizProject;
+import java.util.Scanner;
+public class QuestionService 
+{
+
+		static Question question[] = new Question[5];
+		static String selection[]=new String[5];
+		private int score = 0;
+		public QuestionService() {
+			question[0]=new Question(1,"What is size of byte ","1 byte", "2 byte", "3 byte", "4 byte", "1 byte");
+			question[1]=new Question(2, "What is size of short","1 byte", "2 byte", "3 byte", "4 byte", "2 byte");
+			question[2]=new Question(3, "What is size of int","1 byte", "2 byte", "3 byte", "4 byte", "4 byte");
+			question[3]=new Question(4, "What is size of long","1 byte", "2 byte", "3 byte", "8 byte", "8 byte");
+			question[4]=new Question(5, "What is size of float","1 byte", "2 byte", "3 byte", "4 byte", "4 byte");
+		}
+		public static void playQuez() 
+		{	
+			int i=0;
+			for(Question q: question) {
+				System.out.println("Question number :"+q.getId());
+				System.out.println(q.getQuestion());
+				System.out.println(q.getOption1());
+				System.out.println(q.getOption2());
+				System.out.println(q.getOption3());
+				System.out.println(q.getOption4());
+				Scanner sc=new Scanner(System.in);
+				selection[i] =sc.nextLine();
+				sc.close();
+				i++;
+			}
+			for(String s: selection) {
+				System.out.println(s);
+			}
+		}
+		public void calculateScore() 
+		{   
+			score=0;
+			for(int i=0;i<question.length;i++) 
+			{
+				Question que=question[i];
+				String actualAnswer= que.getAnswer();
+				String userAnswer=selection[i];
+				
+				if(userAnswer.equals(actualAnswer)) 
+				{
+					score++;
+				}
+			}
+		}
+		public void printScore() {
+	        System.out.println("Your score is: " + score);
+		}
+}
+package com.QuizProject;
+
+public class Question {
+
+	private int id;
+	private String question;
+	private String option1;
+	private String option2;
+	private String option3;
+	private String option4;
+	private String answer;
+	
+	public Question(int id, String question, String option1, String option2, String option3, String option4,
+			String answer) {
+		super();
+		this.id = id;
+		this.question = question;
+		this.option1 = option1;
+		this.option2 = option2;
+		this.option3 = option3;
+		this.option4 = option4;
+		this.answer = answer;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getQuestion() {
+		return question;
+	}
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+	public String getOption1() {
+		return option1;
+	}
+	public void setOption1(String option1) {
+		this.option1 = option1;
+	}
+	public String getOption2() {
+		return option2;
+	}
+	public void setOption2(String option2) {
+		this.option2 = option2;
+	}
+	public String getOption3() {
+		return option3;
+	}
+	public void setOption3(String option3) {
+		this.option3 = option3;
+	}
+	public String getOption4() {
+		return option4;
+	}
+	public void setOption4(String option4) {
+		this.option4 = option4;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", question=" + question + ", option1=" + option1 + ", option2=" + option2
+				+ ", option3=" + option3 + ", option4=" + option4 + ", answer=" + answer + "]";
+	}
+	
+}
+package com.QuizProject;
+
+public class Main {
+	public static void main(String[] args) {
+			
+		QuestionService service=new QuestionService(); 
+		service.playQuez();
+		service.calculateScore();
+		service.printScore();
+		
+	}
+
+}
